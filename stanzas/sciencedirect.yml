@@ -1,0 +1,23 @@
+name: sciencedirect
+title: ScienceDirect
+description: Artículos, revistas y libros electrónicos de Elsevier.
+enabled: true
+mode: live
+target: https://www.sciencedirect.com
+host_header: www.sciencedirect.com
+start_path: /
+find_replace:
+  - find: "https://www.sciencedirect.com/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "http://www.sciencedirect.com/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "//www.sciencedirect.com/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "https://sciencedirect.com/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "https://pdf.sciencedirectassets.com/"
+    replace: "{{PROXY_BASE}}/__pdf_assets__/"
+extra_upstreams:
+  - path_prefix: /__pdf_assets__/
+    target: https://pdf.sciencedirectassets.com
+    host_header: pdf.sciencedirectassets.com

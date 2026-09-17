@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bibliolatino — Bases de datos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,650&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/portal.css" />
+</head>
+<body>
+  <div class="utility">
+    <div class="utility-inner">
+      <span>Portal institucional de acceso remoto a recursos electrónicos</span>
+      <div class="utility-links">
+        <a href="/">Inicio</a>
+        <a href="mailto:biblioteca@bibliolatino.com">Soporte biblioteca</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span class="brand-text">
+          <span class="brand-name">Bibliolatino</span>
+          <span class="brand-tag">Biblioteca digital · acceso remoto seguro</span>
+        </span>
+      </a>
+      <nav class="header-nav" aria-label="Principal">
+        <a href="/">Inicio</a>
+        <a class="is-active" href="/databases.html">Bases de datos</a>
+        <a href="/guest/admin">Invitados</a>
+        <a class="cta" href="/logout">Cerrar sesión</a>
+        <div class="user-chip" id="user-chip">
+          <span class="user-avatar" id="chip-avatar">U</span>
+          <span id="chip-name">Sesión</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="shell">
+    <main class="panel">
+      <p class="eyebrow">Catálogo</p>
+      <h1>Bases de datos y revistas</h1>
+      <p class="lead">
+        Selecciona un recurso para buscar artículos, citas o publicaciones.
+        Cada recurso se abre en una nueva pestaña con tu sesión institucional.
+      </p>
+      <div class="catalog">
+      <a class="resource" href="/r/iop/" target="_blank" rel="noopener noreferrer">
+        <span class="resource-icon" aria-hidden="true">I</span>
+        <div>
+          <h2>IOP Science</h2>
+          <p>Revistas y actas de Institute of Physics Publishing.</p>
+        </div>
+        <span class="go">Abrir →</span>
+      </a>
+      <a class="resource" href="/r/sciencedirect/" target="_blank" rel="noopener noreferrer">
+        <span class="resource-icon" aria-hidden="true">S</span>
+        <div>
+          <h2>ScienceDirect</h2>
+          <p>Artículos, revistas y libros electrónicos de Elsevier.</p>
+        </div>
+        <span class="go">Abrir →</span>
+      </a>
+      <a class="resource" href="/r/scopus/" target="_blank" rel="noopener noreferrer">
+        <span class="resource-icon" aria-hidden="true">S</span>
+        <div>
+          <h2>Scopus</h2>
+          <p>Base bibliográfica y de citas de literatura científica.</p>
+        </div>
+        <span class="go">Abrir →</span>
+      </a>
+      <a class="resource" href="/r/simulator/" target="_blank" rel="noopener noreferrer">
+        <span class="resource-icon" aria-hidden="true">R</span>
+        <div>
+          <h2>Revista de demostración</h2>
+          <p>Entorno de prueba para verificar el acceso remoto (sin suscripción externa).</p>
+        </div>
+        <span class="go">Abrir →</span>
+      </a>
+      </div>
+      <p class="note">
+        Si un recurso no muestra el texto completo, la editorial puede estar aún
+        habilitando la dirección IP del servidor de acceso remoto de la institución.
+      </p>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="name">Bibliolatino</p>
+        <p>Plataforma de acceso remoto a recursos académicos electrónicos para instituciones de educación superior.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Servicios</h3>
+        <a href="/databases.html">Bases de datos</a>
+        <a href="/">Portal de acceso</a>
+        <span>Revistas y e-books</span>
+      </div>
+      <div class="footer-col">
+        <h3>Soporte</h3>
+        <a href="mailto:biblioteca@bibliolatino.com">Contacto biblioteca</a>
+        <span>Horario de atención: lun–vie</span>
+        <span>Acceso con cuenta institucional</span>
+      </div>
+      <div class="footer-col">
+        <h3>Institución</h3>
+        <span>Acceso federado / SSO</span>
+        <span>proxy.bibliolatino.com</span>
+        <a href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Bibliolatino · Acceso institucional seguro</span>
+      <span>Uso exclusivo para miembros autorizados</span>
+    </div>
+  </footer>
+
+  <script src="/assets/portal.js"></script>
+</body>
+</html>

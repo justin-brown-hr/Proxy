@@ -1,0 +1,2 @@
+body { background: #f4f7fb; }
+.cdn-marker::after { content: " CDN CSS loaded"; color: #0b5cab; }

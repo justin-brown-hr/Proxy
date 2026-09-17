@@ -1,0 +1,19 @@
+name: simulator
+title: Revista de demostración
+description: Entorno de prueba para verificar el acceso remoto (sin suscripción externa).
+enabled: true
+mode: simulator
+target: http://publisher-simulator:80
+host_header: publisher-simulator
+start_path: /
+find_replace:
+  - find: "http://publisher.example/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "https://publisher.example/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "//publisher.example/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "http://cdn.publisher.example/"
+    replace: "{{PROXY_BASE}}/cdn/"
+  - find: "https://cdn.publisher.example/"
+    replace: "{{PROXY_BASE}}/cdn/"

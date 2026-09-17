@@ -1,0 +1,15 @@
+.env
+*.log
+__pycache__/
+.DS_Store
+postgres_data/
+*.pem
+*.key
+.idea/
+.vscode/
+1.md
+**/credentials*
+docs/credentials.env
+docs/*credentials*
+*.secret
+.deploy_proxy.env

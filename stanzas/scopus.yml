@@ -1,0 +1,17 @@
+name: scopus
+title: Scopus
+description: Base bibliográfica y de citas de literatura científica.
+enabled: true
+mode: live
+target: https://www.scopus.com
+host_header: www.scopus.com
+start_path: /
+find_replace:
+  - find: "https://www.scopus.com/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "http://www.scopus.com/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "//www.scopus.com/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "https://scopus.com/"
+    replace: "{{PROXY_BASE}}/"

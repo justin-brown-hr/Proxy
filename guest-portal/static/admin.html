@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bibliolatino — Aprobación de invitados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,650&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/guest/assets/portal.css" />
+  <link rel="stylesheet" href="/guest/assets/guest.css" />
+</head>
+<body>
+  <div class="utility">
+    <div class="utility-inner">
+      <span>Panel de aprobación de invitados</span>
+      <div class="utility-links">
+        <a href="/databases.html">Bases de datos</a>
+        <a href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span class="brand-text">
+          <span class="brand-name">Bibliolatino</span>
+          <span class="brand-tag">Administración · invitados</span>
+        </span>
+      </a>
+      <nav class="header-nav" aria-label="Principal">
+        <a href="/">Inicio</a>
+        <a href="/databases.html">Bases de datos</a>
+        <a class="is-active" href="/guest/admin">Invitados</a>
+        <a class="cta" href="/logout">Cerrar sesión</a>
+        <div class="user-chip" id="user-chip">
+          <span class="user-avatar" id="chip-avatar">U</span>
+          <span id="chip-name">Sesión</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="shell">
+    <main class="panel">
+      <p class="eyebrow">Administración</p>
+      <h1>Solicitudes pendientes</h1>
+      <p class="lead">
+        Aprueba o rechaza egresados e invitados. Al aprobar, la cuenta se habilita
+        en el directorio sin modificar el núcleo de Keycloak.
+      </p>
+      <p id="admin-msg" class="form-msg" hidden></p>
+      <div id="list" class="guest-list"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="name">Bibliolatino</p>
+        <p>Solo usuarios con rol administrador pueden aprobar solicitudes.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Navegación</h3>
+        <a href="/">Inicio</a>
+        <a href="/databases.html">Bases de datos</a>
+      </div>
+      <div class="footer-col">
+        <h3>Soporte</h3>
+        <a href="mailto:biblioteca@bibliolatino.com">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h3>Sesión</h3>
+        <a href="/logout">Cerrar sesión</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Bibliolatino · Acceso institucional seguro</span>
+      <span>Panel restringido a administradores</span>
+    </div>
+  </footer>
+
+  <script src="/guest/assets/portal.js"></script>
+  <script>
+    const list = document.getElementById("list");
+    const msg = document.getElementById("admin-msg");
+
+    function showMsg(text, ok) {
+      msg.hidden = false;
+      msg.className = "form-msg " + (ok ? "ok" : "err");
+      msg.textContent = text;
+    }
+
+    async function loadPending() {
+      list.innerHTML = "<p class='note'>Cargando solicitudes…</p>";
+      const res = await fetch("/guest/api/admin/pending");
+      const body = await res.json().catch(() => ({}));
+      if (res.status === 403) {
+        list.innerHTML = "";
+        showMsg("No tienes permiso de administrador para este panel.", false);
+        return;
+      }
+      if (!res.ok) {
+        list.innerHTML = "";
+        showMsg(body.detail || "No se pudieron cargar las solicitudes.", false);
+        return;
+      }
+      msg.hidden = true;
+      const users = body.users || [];
+      if (!users.length) {
+        list.innerHTML = "<p class='note'>No hay solicitudes pendientes.</p>";
+        return;
+      }
+      list.innerHTML = users.map((u) => `
+        <article class="guest-card" data-id="${u.id}">
+          <div>
+            <h2>${escapeHtml(u.firstName)} ${escapeHtml(u.lastName)}</h2>
+            <p>${escapeHtml(u.email)}</p>
+            <p class="meta">${escapeHtml(u.institution || "—")} · ${escapeHtml(u.reason || "Sin motivo")}</p>
+          </div>
+          <div class="guest-actions">
+            <button type="button" class="btn btn-main" data-action="approve">Aprobar</button>
+            <button type="button" class="btn btn-ghost" data-action="reject">Rechazar</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function escapeHtml(s) {
+      return String(s || "").replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[c]);
+    }
+
+    list.addEventListener("click", async (e) => {
+      const btn = e.target.closest("button[data-action]");
+      if (!btn) return;
+      const card = btn.closest(".guest-card");
+      const id = card.dataset.id;
+      const action = btn.dataset.action;
+      btn.disabled = true;
+      const res = await fetch(`/guest/api/admin/${id}/${action}`, { method: "POST" });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        showMsg(body.detail || "Operación fallida", false);
+        btn.disabled = false;
+        return;
+      }
+      showMsg(action === "approve" ? "Usuario aprobado y habilitado." : "Solicitud rechazada.", true);
+      await loadPending();
+    });
+
+    loadPending();
+  </script>
+</body>
+</html>

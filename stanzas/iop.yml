@@ -1,0 +1,21 @@
+name: iop
+title: IOP Science
+description: Revistas y actas de Institute of Physics Publishing.
+enabled: true
+mode: live
+target: https://iopscience.iop.org
+host_header: iopscience.iop.org
+start_path: /
+find_replace:
+  - find: "https://iopscience.iop.org/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "http://iopscience.iop.org/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "//iopscience.iop.org/"
+    replace: "{{PROXY_BASE}}/"
+  - find: "https://www.iop.org/"
+    replace: "{{PROXY_BASE}}/__iop_www__/"
+extra_upstreams:
+  - path_prefix: /__iop_www__/
+    target: https://www.iop.org
+    host_header: www.iop.org
