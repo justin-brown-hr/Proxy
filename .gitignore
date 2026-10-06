@@ -1,15 +1,35 @@
+# Secrets / local env
 .env
-*.log
-__pycache__/
-.DS_Store
-postgres_data/
-*.pem
-*.key
-.idea/
-.vscode/
-1.md
+.deploy_proxy.env
+*.secret
 **/credentials*
 docs/credentials.env
 docs/*credentials*
-*.secret
-.deploy_proxy.env
+
+# Logs & caches
+*.log
+__pycache__/
+.DS_Store
+.idea/
+.vscode/
+
+# Runtime data
+postgres_data/
+certs/
+certbot-www/
+*.pem
+*.key
+
+# Large / local-only media (keep scripts as .md; store videos outside git)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.srt
+
+# Packages & misc junk
+*.deb
+*.rpm
+1.md
+docs/chathistory.md

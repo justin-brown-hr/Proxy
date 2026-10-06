@@ -2,6 +2,17 @@
 
 Dockerized reverse-proxy stack with unified SSO (EZproxy-style).
 
+## Documentation & training
+
+Handover package (Spanish), covering architecture, install, SSO, stanzas, guest portal, LDAP,
+Metabase, runbooks, troubleshooting and the hands-on training modules (A–G):
+
+| Deliverable | Format | Audience |
+|---|---|---|
+| [docs/Manual-Tecnico-Operativo-y-Capacitacion.docx](docs/Manual-Tecnico-Operativo-y-Capacitacion.docx) | Word | Client handover — full manual, 17 sections |
+| [docs/Capacitacion-University-Library-Proxy.pptx](docs/Capacitacion-University-Library-Proxy.pptx) | PowerPoint | Training support deck, 31 slides |
+| [docs/manual-y-capacitacion.md](docs/manual-y-capacitacion.md) | Markdown | Same manual, for reading inside the repo |
+
 ## Milestones
 
 | Milestone | Status | What |
